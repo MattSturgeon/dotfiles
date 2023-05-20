@@ -10,10 +10,12 @@ return {
       -- refer to the configuration section below
     })
     wk.register({
-      -- Register some groups
-      f = { name = 'file' },
-      g = { name = 'git' },
-      s = { name = 'search' },
-    }, { prefix = '<leader>' })
+      ['<leader>'] = {
+        -- Register some groups
+        f = { name = 'file' },
+        g = { name = 'git' },
+        s = { name = 'search' },
+      },
+    })
   end,
 }
