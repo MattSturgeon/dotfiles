@@ -16,10 +16,16 @@ local M = {
     'hrsh7th/nvim-cmp',
     'hrsh7th/cmp-nvim-lsp',
     'L3MON4D3/LuaSnip',
+
+    -- Neovim mappings
+    'folke/neodev.nvim',
   }
 }
 
 M.config = function()
+  -- NeoDev must be setup before lspconfig
+  require('neodev').setup({})
+
   local lsp = require('lsp-zero').preset({})
 
   lsp.on_attach(function(_, bufnr)
