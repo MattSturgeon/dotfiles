@@ -58,6 +58,12 @@
   programs = {
     # Let Home Manager install and manage itself.
     home-manager.enable = true;
+
+    # Neovim
+    neovim = {
+      enable = true;
+      package = pkgs.neovim-nightly;
+    };
   };
 
 }
