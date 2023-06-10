@@ -131,6 +131,58 @@
 	  desc = "Go to right window";
         };
       };
+      plugins = {
+        which-key.enable = true;
+	bufferline.enable = true;
+	lualine.enable = true;
+	gitsigns.enable = true;
+	indent-blankline = {
+	  enable = true;
+	  charList = [ "¦" ];
+          charListBlankline = [ "↵" ];
+	  useTreesitter = true;
+	};
+	treesitter = {
+	    enable = true;
+	    indent = true;
+	    nixvimInjections = true; # Highlight lua in NixVim config
+	};
+	treesitter-context.enable = true; # Prevent context from scrolling off screen (e.g. function declaration)
+	nvim-cmp = {
+	  enable = true;
+	  mapping = {
+            "<CR>" = "cmp.mapping.confirm({ select = true })";
+            "<Tab>" = {
+              modes = [ "i" "s" ];
+              action = ''
+                function(fallback)
+                  if cmp.visible() then
+                    cmp.select_next_item()
+                  elseif luasnip.expandable() then
+                    luasnip.expand()
+                  elseif luasnip.expand_or_jumpable() then
+                    luasnip.expand_or_jump()
+                  elseif check_backspace() then
+                    fallback()
+                  else
+                    fallback()
+                  end
+                end
+              '';
+            };
+	  };
+	};
+	cmp-buffer.enable = true;
+	#cmp_luasnip.enable = true;
+	cmp-treesitter.enable = true;
+	#cmp-nvim-lsp.enable=true;
+	#cmp-dap.enable = true;
+        #cmp-copilot.enable = true;
+	cmp-git.enable = true; # GitHub/GitLab issue/pr completion
+	cmp-conventionalcommits.enable = true;
+	cmp-spell.enable = true;
+	cmp-emoji.enable = true;
+      };
     };
   };
 
