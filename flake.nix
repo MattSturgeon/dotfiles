@@ -7,29 +7,30 @@
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    neovim-nightly-overlay.url = "github:nix-community/neovim-nightly-overlay";
+    hyprland.url = "github:hyprwm/Hyprland";
+    nixvim.url = "github:pta2002/nixvim";
   };
 
   outputs = {
     nixpkgs,
     home-manager,
-    neovim-nightly-overlay,
+    hyprland,
+    nixvim,
     ...
   }:
     let
       system = "x86_64-linux";
       pkgs = nixpkgs.legacyPackages.${system};
-      overlays = [
-        neovim-nightly-overlay.overlay
-      ];
     in {
       homeConfigurations.matt = home-manager.lib.homeManagerConfiguration {
         inherit pkgs;
 
         modules = [
           ./home.nix
+          nixvim.homeManagerModules.nixvim
+          hyprland.homeManagerModules.default
           {
-            nixpkgs.overlays = overlays;
+            wayland.windowManager.hyprland.enable = true;
           }
         ];
       };

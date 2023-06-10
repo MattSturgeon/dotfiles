@@ -79,10 +79,37 @@
     };
 
     # Neovim
-    neovim = {
+    nixvim = {
       enable = true;
-      package = pkgs.neovim-nightly;
+      viAlias = true;
+      vimAlias = true;
+      colorschemes.catppuccin = {
+        enable = true;
+        background.light = "macchiato";
+        background.dark = "mocha";
+      };
+      globals = {
+        mapleader = " ";
+      };
+      options = {
+        number = true; # Line numbers
+	relativenumber = true; # ^Relative
+	shiftwidth = 4; # Tab width
+	cursorline = true; # Highlight the current line
+	scrolloff = 8; # Ensure there's at least 8 lines around the cursor
+	title = true; # Let vim set the window title
+      };
     };
   };
 
+  wayland.windowManager.hyprland = {
+    enable = true;
+    xwayland = {
+      enable = true;
+      hidpi = true;
+    };
+    extraConfig = ''
+      bind=SUPER,E,exit,
+    '';
+  };
 }
