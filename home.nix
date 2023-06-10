@@ -99,6 +99,37 @@
 	scrolloff = 8; # Ensure there's at least 8 lines around the cursor
 	title = true; # Let vim set the window title
       };
+      maps = {
+        # Better up/down movement
+        normalVisualOp."j" = {
+	  action = "v:count == 0 ? 'gj' : 'j'";
+	  expr = true;
+	  silent = true;
+	};
+        normalVisualOp."k" = {
+          action = "v:count == 0 ? 'gk' : 'k'";
+	  expr = true;
+	  silent = true;
+	};
+
+        # Better window motions
+        normal."<C-h>" = {
+	  action = "<C-w>h";
+	  desc = "Go to left window";
+        };
+        normal."<C-j>" = {
+          action = "<C-w>j";
+	  desc = "Go to lower window";
+        };
+        normal."<C-k>" = {
+          action = "<C-w>k";
+	  desc = "Go to upper window";
+        };
+        normal."<C-l>" = {
+          action = "<C-w>l";
+	  desc = "Go to right window";
+        };
+      };
     };
   };
 
